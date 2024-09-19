@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Simple</title>
+    <link rel="icon" href="" id="dynamic-favicon">
+    <script src="/js/settings.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        /* Reset default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Basic styling for header and navigation */
+        body {
+            background-color: #101720; /* Background color set to white */
+            font-family: Impact, sans-serif; /* Fallback font */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top-line"></div> <!-- Thin line -->
+        <a href="/" class="logo">
+            <img src="https://github.com/PlayFlixo/testing-v2/blob/main/assets/images/no-bg-logo.png?raw=true" alt="Project Neutron Logo">
+            <span class="logo-text">Project Simple</span>
+        </a>
+        <a href="/" class="nav-text home-text">Home</a>
+        <a href="/gs" class="nav-text games-text">Games</a>
+        <a href="/apps" class="nav-text apps-text">Apps</a>
+        <a href="/search" class="nav-text movies-text">Search</a>
+        <a href="/settings" class="nav-text tv-text">Settings</a>
+        <div class="social-icons">
+            <a href="https://discord.gg/" class="social-icon discord" target="_blank"><i class="fab fa-discord"></i></a>
+            <a href="https://www.tiktok.com/@project." class="social-icon tiktok" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/project./" class="social-icon instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.snapchat.com/add/project." class="social-icon snap" target="_blank"><i class="fab fa-snapchat"></i></a>
+            <a href="https://www.youtube.com/@project." class="social-icon youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+        <div class="time-display" id="timeDisplay"></div> <!-- Time display -->
+    </header>
+    <div class="centered-text">Settings</div>
+    <button id="ab-cloak">Open in About:Blank</button>
+    <div class="themes-text">Themes</div>
+    <div class="dropdown">
+        Coming Soon...
+    </div>
+    <div class="cloak-text">Tab Cloaking</div>
+    <div class="text-cloak-container">
+        <input type="text" class="text-cloak-box" id="tab-name-input" placeholder="Tab Name">
+        <button id="set-tab-name" class="set-tab-name-button">Set Tab Name</button>
+    </div>
+    <div class="icon-cloak-container">
+        <input type="text" class="icon-cloak-box" id="icon-url-input" placeholder="Tab Icon URL">
+        <button id="set-tab-icon" class="set-tab-icon-button">Set Icon</button>
+    </div>
+<div class="preset-buttons">
+    <button class="preset-button" data-title="Project Neutron" data-favicon="/assets/images/main-favicon.ico" style="background-image: url('/assets/images/main-favicon.ico');"></button>
+    <button class="preset-button" data-title="Google" data-favicon="https://google.com/favicon.ico" style="background-image: url('https://google.com/favicon.ico');"></button>
+    <button class="preset-button" data-title="My Drive - Google Drive" data-favicon="https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png" style="background-image: url('https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png');"></button>
+    <button class="preset-button" data-title="Google Docs" data-favicon="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" style="background-image: url('https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico');"></button>
+    <button class="preset-button" data-title="Home | Schoology" data-favicon="https://asset-cdn.schoology.com/sites/all/themes/schoology_theme/favicon.ico" style="background-image: url('https://asset-cdn.schoology.com/sites/all/themes/schoology_theme/favicon.ico');"></button>
+    <button class="preset-button" data-title="SmartPass" data-favicon="https://cdn.prod.website-files.com/5c06a26695c70027e67b9afb/5fadd408f7a853e825459484_icon_60pt%403x.png" style="background-image: url('https://cdn.prod.website-files.com/5c06a26695c70027e67b9afb/5fadd408f7a853e825459484_icon_60pt%403x.png');"></button>
+</div>
+    <div class="panic-key-text">Panic Key</div>
+    <div class="set-panic-key-container">
+        <input type="text" class="set-panic-key-box" placeholder="Panic Key">
+        <button id="set-panic-key" class="set-panic-key-button">Set Panic Key</button>
+    </div>
+    <div class="set-panic-url-container">
+        <input type="text" class="set-panic-url-box" placeholder="Panic URL">
+        <button id="set-panic-url" class="set-panic-url-button">Set Panic URL</button>
+        <button id="ad-panic-key" class="ad-panic-key-button">Auto-Detect Panic Key</button>
+    </div>
+    <div class="hidden-text-container">
+        <p class="hidden-text">Congrats! You found the hidden text!</p>
+    </div>
+    <script>
+        function updateTime() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+
+            // Convert to 12-hour format
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+
+            // Format hours with leading zero if necessary
+            const hoursString = String(hours).padStart(2, '0');
+            const timeString = `${hoursString}:${minutes}:${seconds} ${ampm}`;
+            document.getElementById('timeDisplay').textContent = timeString;
+        }
+
+        // Update time every second
+        setInterval(updateTime, 1000);
+
+        // Initial call to display time immediately
+        updateTime();
+    </script>
+   <script>
+        document.getElementById('ab-cloak').addEventListener('click', function() {
+        var win = window.open();
+        win.document.body.style.margin = '0';
+        win.document.body.style.height = '100vh';
+        var iframe = win.document.createElement('iframe');
+        win.document.title = "Project Neutron";
+        iframe.style.border = 'none';
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        iframe.style.margin = '0';
+        iframe.src = '/';  // Replace '/' with your desired URL if needed
+        win.document.body.appendChild(iframe);
+    });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to set initial values for the input fields from local storage
+            function setInitialValues() {
+                // Set the tab name input value to the current document title
+                var tabNameInput = document.getElementById('tab-name-input');
+                tabNameInput.value = document.title;
+
+                // Set the icon URL input value to the current favicon URL
+                var iconUrlInput = document.getElementById('icon-url-input');
+                var link = document.querySelector("link[rel='shortcut icon'], link[rel='icon']");
+
+                if (link) {
+                    iconUrlInput.value = link.href;
+                } else {
+                    iconUrlInput.value = ''; // Clear the input if no favicon is set
+                }
+
+                // Set the panic key input value from local storage
+                var panicKeyInput = document.querySelector('.set-panic-key-box');
+                panicKeyInput.value = localStorage.getItem('panickey') || '';
+
+                // Set the panic URL input value from local storage
+                var panicUrlInput = document.querySelector('.set-panic-url-box');
+                panicUrlInput.value = localStorage.getItem('panicurl') || 'https://google.com';
+            }
+
+            // Set initial values on page load
+            setInitialValues();
+
+            // Event listener for changing the tab name
+            document.getElementById('set-tab-name').addEventListener('click', function() {
+                var input = document.getElementById('tab-name-input');
+                var newTabName = input.value.trim(); // Get the input value and trim any extra spaces
+
+                if (newTabName) {
+                    document.title = newTabName; // Set the page title
+                    localStorage.setItem('tabName', newTabName); // Save to local storage
+                } else {
+                    alert('Please enter a tab name'); // Alert if the input is empty
+                }
+            });
+
+            // Event listener for changing the favicon
+            document.getElementById('set-tab-icon').addEventListener('click', function() {
+                var input = document.getElementById('icon-url-input');
+                var iconUrl = input.value.trim(); // Get the input value and trim any extra spaces
+
+                if (iconUrl) {
+                    var link = document.querySelector("link[rel='shortcut icon'], link[rel='icon']");
+
+                    if (link) {
+                        link.href = iconUrl; // Update the href attribute of the existing link
+                    } else {
+                        // If no link element with rel="shortcut icon" or rel="icon" exists, create one
+                        link = document.createElement('link');
+                        link.rel = 'icon';
+                        link.href = iconUrl;
+                        document.head.appendChild(link);
+                    }
+
+                    // Save the new favicon URL to local storage
+                    localStorage.setItem('iconUrl', iconUrl);
+                } else {
+                    alert('Please enter a valid icon URL'); // Alert if the input is empty
+                }
+            });
+
+            // Event listener for setting panic key
+            document.getElementById('set-panic-key').addEventListener('click', () => {
+                const panicKey = document.querySelector('.set-panic-key-box').value;
+                if (panicKey) {
+                    localStorage.setItem('panickey', panicKey);
+                    alert('Panic key set to ' + panicKey);
+                } else {
+                    alert('Please enter a panic key.');
+                }
+            });
+
+            // Event listener for auto-detecting panic key
+            document.getElementById('ad-panic-key').addEventListener('click', () => {
+                alert('Press any key to set as Panic Key');
+
+                // Add a one-time keydown listener to detect the key
+                const handleKeyDown = (e) => {
+                    const panicKey = e.key;
+                    localStorage.setItem('panickey', panicKey);
+                    document.querySelector('.set-panic-key-box').value = panicKey; // Set the key in the input box
+                    alert('Panic key set to ' + panicKey);
+                    document.removeEventListener('keydown', handleKeyDown); // Remove listener after setting key
+                };
+
+                document.addEventListener('keydown', handleKeyDown, { once: true });
+            });
+
+            // Event listener for setting panic URL
+            document.getElementById('set-panic-url').addEventListener('click', () => {
+                const panicUrl = document.querySelector('.set-panic-url-box').value;
+                if (!panicUrl) {
+                    localStorage.setItem('panicurl', 'https://google.com');
+                } else {
+                    localStorage.setItem('panicurl', panicUrl);
+                }
+                alert('Panic URL set to ' + (panicUrl || 'https://google.com'));
+            });
+
+            // Handle Panic Key Press
+            document.addEventListener('keydown', (e) => {
+                const panicKey = localStorage.getItem('panickey');
+                const panicUrl = localStorage.getItem('panicurl') || 'https://google.com';
+
+                if (panicKey && e.key === panicKey) {
+                    window.location.replace(panicUrl);
+                }
+            });
+
+            // Event listener for preset buttons
+            document.querySelectorAll('.preset-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    var title = this.getAttribute('data-title');
+                    var faviconUrl = this.getAttribute('data-favicon');
+
+                    // Set the page title
+                    document.title = title;
+                    localStorage.setItem('tabName', title);
+
+                    // Set the favicon
+                    var link = document.querySelector("link[rel='shortcut icon'], link[rel='icon']");
+                    if (link) {
+                        link.href = faviconUrl;
+                    } else {
+                        link = document.createElement('link');
+                        link.rel = 'icon';
+                        link.href = faviconUrl;
+                        document.head.appendChild(link);
+                    }
+                    localStorage.setItem('iconUrl', faviconUrl);
+
+                    // Update input fields with new values
+                    setInitialValues();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

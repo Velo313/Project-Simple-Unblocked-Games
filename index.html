@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVCEWNB2TH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-LVCEWNB2TH');
+    </script>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "n7w6y6wzt8");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Simple</title>
+    <meta name="description" content="Project Simple is your one stop shop for unblocked games and apps. Play today!" />
+    <link rel="icon" href="" id="dynamic-favicon">
+    <script src="/js/settings.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="/js/timeout.js"></script>
+    <style>
+        /* Reset default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Basic styling for header and navigation */
+        body {
+            background-color: #101720; /* Background color set to #101720 */
+            font-family: Impact, sans-serif; /* Fallback font */
+        }
+    </style>
+</head>
+<body>
+        <div class="left-circle" onclick="scrollImage(-1)"><i class="fas fa-arrow-left"></i></div> <!-- Left arrow -->
+        <div class="right-circle" onclick="scrollImage(1)"><i class="fas fa-arrow-right"></i></div> <!-- Right arrow -->
+        <div class="image-container">
+            <img id="mainImage" src="/assets/images/announcements/4.png" alt="Missing Image">
+        </div> 
+    <header>
+        <div class="top-line"></div> <!-- Thin line -->
+        <a href="/" class="logo">
+            <img src="https://github.com/PlayFlixo/testing-v2/blob/main/assets/images/no-bg-logo.png?raw=true" alt="Project Neutron Logo">
+            <span class="logo-text">Project Simple</span>
+        </a>
+        <a href="/" class="nav-text home-text">Home</a>
+        <a href="/gs" class="nav-text games-text">Games</a>
+        <a href="/apps" class="nav-text apps-text">Apps</a>
+        <a href="/search" class="nav-text movies-text">Search</a>
+        <a href="/settings" class="nav-text tv-text">Settings</a>
+        <div class="social-icons">
+            <a href="https://discord.gg/" class="social-icon discord" target="_blank"><i class="fab fa-discord"></i></a>
+            <a href="https://www.tiktok.com/@project." class="social-icon tiktok" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/project./" class="social-icon instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.snapchat.com/add/project." class="social-icon snap" target="_blank"><i class="fab fa-snapchat"></i></a>
+            <a href="https://www.youtube.com/@project." class="social-icon youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+        <div class="time-display" id="timeDisplay"></div> <!-- Time display -->
+    </header>
+    <!-- Main content of your website -->
+    <div class="large-text">
+        Project<br>Simple
+    </div>
+    <div class="updates">
+        <div class="updates-text"><strong>Simple Streaming</strong> 10k+ movies, 50k+ episodes, join the waitlist today <a style="text-decoration: none; color: white;" href="https://streaming.project-neutron.site/"><strong>Join Waitlist</strong></a></div>
+    </div>
+    <script>
+        // JavaScript for image scrolling
+        const images = [
+            'https://www.speedrun.com/static/game/yd4r0nw1/cover.png?v=aea7a35',
+            '/assets/images/announcements/4.png',
+            'https://www.wambooli.com/blog/wp-content/uploads/2008/04/aspect1.png'
+        ];
+
+        let currentIndex = 1; // Starting index
+
+        function scrollImage(direction) {
+            currentIndex += direction;
+            
+            // Wrap around at the ends of the array
+            if (currentIndex >= images.length) {
+                currentIndex = 0;
+            } else if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            }
+            
+            // Get references to DOM elements
+            const mainImage = document.getElementById('mainImage');
+
+            // Add class to initiate fade-out animation
+            mainImage.classList.add('image-fade-out');
+
+            // Change image source after fade-out animation completes
+            setTimeout(() => {
+                mainImage.src = images[currentIndex];
+                
+                // Remove class to initiate fade-in animation
+                mainImage.classList.remove('image-fade-out');
+            }, 500); // 500ms delay matches transition duration
+        }
+    </script>
+<script>
+        function updateTime() {
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+
+    // Convert to 12-hour format
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+
+    // Format hours with leading zero if necessary
+    const hoursString = String(hours).padStart(2, '0');
+    const timeString = `${hoursString}:${minutes}:${seconds} ${ampm}`;
+    document.getElementById('timeDisplay').textContent = timeString;
+}
+
+// Update time every second
+setInterval(updateTime, 1000);
+
+// Initial call to display time immediately
+updateTime();
+</script>
+</body>
+</html>
